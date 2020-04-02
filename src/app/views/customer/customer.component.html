@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>Search</strong>
+      </div>
+      <div class="card-body">
+        <form class="form-horizontal" [formGroup]="searchForm">
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label" for="hf-email">Email</label>
+            <div class="col-md-4">
+              <input type="email" id="hf-email" name="hf-email" formControlName="email" class="form-control" placeholder="Enter Email.." autocomplete="email">
+            </div>
+            <label class="col-md-2 col-form-label" for="hf-email">Phonenumber</label>
+            <div class="col-md-4">
+              <input type="text"  name="hf-email" formControlName="phonenumber" class="form-control" placeholder="Enter phonenumber.." autocomplete="email">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button type="submit" (click)="search()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Search</button>
+      </div>
+    </div>
+  </div><!--/.col-->
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Results
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+          <tr>
+            <th *ngFor = "let column of headers">
+              {{column}}
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor = "let item of lstRs | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
+            <td>{{i+1}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.dateRegistered}}</td>
+          </tr>
+          <tr *ngIf="lstRs.length==0"><td colspan="4">No record</td></tr>
+          </tbody>
+        </table>
+        <nav>
+          <ngb-pagination [collectionSize]="lstRs.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="7" [rotate]="true"></ngb-pagination>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>

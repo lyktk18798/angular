@@ -1,0 +1,99 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="saveForm">
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Name</label>
+      <div class="col-md-4">
+        <input type="text" formControlName="name" class="form-control" placeholder="Enter name.." [ngClass]="{ 'is-invalid': nameValid}">
+        <div *ngIf="nameValid" class="invalid-feedback">
+          <div *ngIf="name.errors.required">Name product is required</div>
+        </div>
+      </div>
+      <label class="col-md-2 col-form-label">Producer</label>
+      <div class="col-md-4">
+        <select class="form-control" formControlName="producer">
+          <option>---Choose---</option>
+          <option [ngValue]="item.id" *ngFor="let item of lstProducer">{{item.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Quantity</label>
+      <div class="col-md-4">
+        <input type="text" formControlName="quantity" class="form-control" [ngClass]="{ 'is-invalid': quantityValid}">
+        <div *ngIf="quantityValid" class="invalid-feedback">
+          <div *ngIf="quantity.errors.required">Quantity is required</div>
+          <div *ngIf="quantity.errors.pattern">Quantity is invalid</div>
+        </div>
+      </div>
+      <label class="col-md-2 col-form-label">Price</label>
+      <div class="col-md-4">
+        <input type="text" formControlName="price" class="form-control" autocomplete="email" [ngClass]="{ 'is-invalid': priceValid}">
+        <div *ngIf="priceValid" class="invalid-feedback">
+          <div *ngIf="price.errors.required">Price is required</div>
+          <div *ngIf="price.errors.pattern">Price is invalid</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Color</label>
+      <div class="col-md-4 products-colors">
+        <select class="form-control" formControlName="color">
+          <option>---Choose---</option>
+          <option [ngValue]="item.id" *ngFor="let item of lstColor">{{item.name}}
+          </option>
+        </select>
+      </div>
+      <div *ngIf="colorValid" class="invalid-feedback">
+        <div *ngIf="color.errors.required">Color is required</div>
+      </div>
+      <label class="col-md-2 col-form-label">Size</label>
+      <div class="col-md-4">
+        <input type="text" formControlName="size" class="form-control" autocomplete="email" [ngClass]="{ 'is-invalid': sizeValid}">
+        <div *ngIf="sizeValid" class="invalid-feedback">
+          <div *ngIf="size.errors.required">Size is required</div>
+          <div *ngIf="size.errors.pattern">Size is invalid</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Category</label>
+      <div class="col-md-4">
+        <select class="form-control" formControlName="category">
+          <option>---Choose---</option>
+          <option [ngValue]="item.id" *ngFor="let item of lstCategory">{{item.name}}</option>
+        </select>
+      </div>
+      <label class="col-md-2 col-form-label">Group</label>
+      <div class="col-md-4">
+        <!--<input [style.background]="color" [(colorPicker)]="color" class="form-control" (colorPickerClose)="getColor($event)"/>-->
+        <select class="form-control" formControlName="groupId">
+          <option>---Choose---</option>
+          <option [ngValue]="item.id" *ngFor="let item of lstGroups">{{item.name}}</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Short desciption</label>
+      <div class="col-md-4">
+        <textarea name="Text1" formControlName="desc" class="form-control" rows="9"></textarea>
+      </div>
+      <label class="col-md-2 col-form-label">Image</label>
+      <div class="col-md-4" style="height: 180px;">
+        <app-upload (imgURL) = "getURL($event)" (files)="getFiles($event)"></app-upload>
+        <img [src]="imgURL" width="100%" height="100%" class="img-product" *ngIf="imgURL">
+      </div>
+    </div>
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="submit"  (click)="save()" class="btn btn-sm btn-success"><i class="fa fa-save"></i>  Save</button>
+  <button type="button" class="btn btn-sm btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

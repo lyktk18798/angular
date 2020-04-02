@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="saveForm">
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Email</label>
+      <div class="col-md-10">
+        <input type="text" formControlName="email" placeholder="Enter email valid.." class="form-control" [ngClass]="{ 'is-invalid': emailValid}" />
+        <div *ngIf="emailValid" class="invalid-feedback">
+          <div *ngIf="email.errors.required">Email is required</div>
+          <div *ngIf="email.errors.email">Email is invalid</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Fullname</label>
+      <div class="col-md-10">
+        <input type="text" formControlName="fullname" class="form-control" placeholder="Enter fullname.." [ngClass]="{ 'is-invalid': fullnameValid}">
+        <div *ngIf="fullnameValid" class="invalid-feedback">
+          <div *ngIf="fullname.errors.required">Fullname is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Phone</label>
+      <div class="col-md-10">
+        <input type="text" formControlName="phonenumber" class="form-control" placeholder="Enter phonenumber.." [ngClass]="{ 'is-invalid': phoneValid}">
+        <div *ngIf="phoneValid" class="invalid-feedback">
+          <div *ngIf="phonenumber.errors.required">Phonenumber is required</div>
+          <div *ngIf="phonenumber.errors.pattern">Phonenumber is invalid</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label">Role</label>
+      <div class="col-md-10">
+        <select class="form-control" formControlName="role_user">
+          <option [ngValue]="item.id" *ngFor="let item of lstRoles">{{item.name}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="submit" (click)="save()" class="btn btn-sm btn-success"><i class="fa fa-save"></i>  Save</button>
+  <button type="button" class="btn btn-sm btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

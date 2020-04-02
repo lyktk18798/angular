@@ -1,0 +1,145 @@
+<app-alert></app-alert>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>Search</strong>
+      </div>
+      <div class="card-body">
+        <form class="form-horizontal" [formGroup]="searchForm">
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label" for="hf-email">Code</label>
+            <div class="col-md-4">
+              <input type="email" id="hf-email" name="hf-email" formControlName="code" class="form-control" placeholder="Enter code.." autocomplete="email">
+            </div>
+            <label class="col-md-2 col-form-label">Name</label>
+            <div class="col-md-4">
+              <input type="text" formControlName="name" class="form-control" placeholder="Enter name..">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label">Price from </label>
+            <div class="col-md-4">
+              <input type="text" formControlName="priceFrom" class="form-control" autocomplete="email">
+            </div>
+            <label class="col-md-2 col-form-label">Price to</label>
+            <div class="col-md-4">
+                <input type="text" formControlName="priceTo" class="form-control" autocomplete="email">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label">Imort from </label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                <a (click)="d.toggle()" class="input-group-text myIcons"> <i class="fa fa-calendar"></i></a>
+                </div>
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="dateFrom">
+                </div>
+            </div>
+            <label class="col-md-2 col-form-label">Import to</label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <a (click)="d1.toggle()" class="input-group-text myIcons"> <i class="fa fa-calendar"></i></a>
+                </div>
+                <input class="form-control" placeholder="yyyy-mm-dd"
+                       name="dp" ngbDatepicker #d1="ngbDatepicker" formControlName="dateTo">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label">Group</label>
+            <div class="col-md-4">
+              <!--<input [style.background]="color" [(colorPicker)]="color" class="form-control" (colorPickerClose)="getColor($event)"/>-->
+              <select class="form-control" formControlName="groupId">
+                <option [ngValue]="item.id" *ngFor="let item of lstGroups">{{item.name}}</option>
+              </select>
+            </div>
+            <label class="col-md-2 col-form-label">Size</label>
+            <div class="col-md-4">
+              <input type="text" formControlName="size" class="form-control" autocomplete="email">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label">Category</label>
+            <div class="col-md-4">
+              <select class="form-control" formControlName="category">
+                <option [ngValue]="item.id" *ngFor="let item of lstCategory">{{item.name}}</option>
+              </select>
+            </div>
+            <label class="col-md-2 col-form-label">Producer</label>
+            <div class="col-md-4">
+              <select class="form-control" formControlName="producer">
+                <option [ngValue]="item.id" *ngFor="let item of lstProducer">{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label">Color</label>
+            <div class="col-md-4 products-colors" formControlName="color">
+              <ul >
+                <li *ngFor="let item of lstColor" (click)="onSelect(item)">
+                  <a class="myIcons"><span [style.backgroundColor]="item.name"></span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button type="submit" (click)="search()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Search</button>
+        <button type="reset" (click)="addNew()" class="btn btn-sm btn-danger"><i class="fa fa-user-plus"></i>Add</button>
+      </div>
+    </div>
+  </div><!--/.col-->
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Results
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+          <tr>
+            <th *ngFor = "let column of headers">
+              {{column}}
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor = "let item of lstRs | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
+            <td>{{i+1}}</td>
+            <td>{{item.code}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.productGroup.name}}</td>
+            <td>{{item.category.name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.color.name}}</td>
+            <td>{{item.size}}</td>
+            <td>{{item.desciption}}</td>
+            <td style="width: 50px; height: 80px;"><img width="100%" height="100%" class="img-avatar" src="assets/img/products/{{item.image}}"></td>
+            <td>{{item.producer.name}}</td>
+            <td>{{item.dateImport}}</td>
+            <td>
+              <a (click)="edit(item)" tooltip="Edit user" placement="bottom"><i class="fa fa-edit myIcons"></i></a>
+              <a (click)="delete(item)" tooltip="Detele user" placement="bottom"><i class="fa fa-trash myIcons"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td *ngIf="lstRs.length===0" colspan="14">No records</td>
+          </tr>
+          </tbody>
+        </table>
+        <nav>
+          <ngb-pagination [collectionSize]="lstRs.length" [(pageSize)]="pageSize" [(page)]="page" [rotate]="true"></ngb-pagination>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>
