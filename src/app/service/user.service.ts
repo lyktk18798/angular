@@ -13,8 +13,8 @@ export class UserService {
   search (searchForm: FormGroup): Observable<User[]> {
     const params = new HttpParams()
     .set('email', searchForm.value.email)
-    .set('fullname', searchForm.value.fullname)
-    .set('phonenumber', searchForm.value.phonenumber)
+    .set('fullName', searchForm.value.fullname)
+    .set('phoneNumber', searchForm.value.phonenumber)
     .set('role', searchForm.value.role_user);
     return this.http.get<User[]>(`${baseUrl}user/getAll`, {params: params});
   }

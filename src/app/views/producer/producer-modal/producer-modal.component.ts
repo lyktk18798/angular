@@ -29,7 +29,7 @@ export class ProducerModalComponent implements OnInit {
       email: new FormControl (this.u.email, [Validators.required, Validators.email]),
       fullname: new FormControl (this.u.name, Validators.required),
       phonenumber: new FormControl(this.u.phone, [Validators.required, Validators.pattern('[0-9]{10}')]),
-      category: new FormControl(this.u.id ? this.u.category.id : ''),
+      category: new FormControl(this.u.id ? this.u.category.id : 1),
     });
   }
 
@@ -42,7 +42,7 @@ export class ProducerModalComponent implements OnInit {
   get fullname() { return this.saveForm.get('fullname'); }
   get phonenumber() { return this.saveForm.get('phonenumber'); }
   get emailValid() {return this.email.invalid && (this.email.dirty || this.email.touched) && this.email.errors ; }
-  get fullnameValid() {return this.fullname.invalid && (this.fullname.dirty || this.email.touched) && this.fullname.errors ; }
+  get fullnameValid() {return this.fullname.invalid && (this.fullname.dirty || this.fullname.touched) && this.fullname.errors ; }
   get phoneValid() {return this.phonenumber.invalid && (this.phonenumber.dirty || this.phonenumber.touched) && this.phonenumber.errors ; }
   save() {
     this.producer = this.u;

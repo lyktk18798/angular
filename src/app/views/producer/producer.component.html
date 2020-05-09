@@ -60,8 +60,8 @@
             </th>
           </tr>
           </thead>
-          <tbody *ngFor = "let item of lstRs | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
-          <tr>
+          <tbody>
+          <tr *ngFor = "let item of lstRs | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
             <td>{{i+1}}</td>
             <td>{{item.email}}</td>
             <td>{{item.name}}</td>

@@ -9,7 +9,6 @@ import {error} from 'selenium-webdriver';
   styleUrls: ['./modal-comfirm.component.scss']
 })
 export class ModalComfirmComponent implements OnInit {
-
   constructor(public activeModal: NgbActiveModal,
               private alertService: AlertService) { }
   @Input() id;

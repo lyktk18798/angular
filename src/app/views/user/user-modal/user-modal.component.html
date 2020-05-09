@@ -47,6 +47,6 @@
 
 </div>
 <div class="modal-footer">
-  <button type="submit" (click)="save()" class="btn btn-sm btn-success"><i class="fa fa-save"></i>  Save</button>
+  <button type="submit" (click)="save()" [disabled]="saveForm.invalid" class="btn btn-sm btn-success"><i class="fa fa-save"></i>  Save</button>
   <button type="button" class="btn btn-sm btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

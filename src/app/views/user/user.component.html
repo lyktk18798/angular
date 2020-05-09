@@ -14,13 +14,13 @@
             </div>
             <label class="col-md-2 col-form-label">Phone number</label>
             <div class="col-md-4">
-              <input type="text" formControlName="phonenumber" class="form-control" placeholder="Enter phone number..">
+              <input type="text" formControlName="phonenumber" class="form-control" placeholder="Enter phone number.." autocomplete="phonenumber">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-2 col-form-label">Fullname</label>
             <div class="col-md-4">
-              <input type="text" formControlName="fullname" class="form-control" placeholder="Enter fullname.." autocomplete="email">
+              <input type="text" formControlName="fullname" class="form-control" placeholder="Enter fullname.." autocomplete="fullname">
             </div>
             <label class="col-md-2 col-form-label">Role</label>
             <div class="col-md-4">
@@ -32,7 +32,7 @@
         </form>
       </div>
       <div class="card-footer">
-        <button type="submit" (click)="alertService.success('Add new user successfully!', {autoClose: true});" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Search</button>
+        <button type="submit" (click)="search()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Search</button>
         <button type="reset" (click)="addNew()" class="btn btn-sm btn-danger"><i class="fa fa-user-plus"></i>Add</button>
       </div>
     </div>
