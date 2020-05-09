@@ -50,7 +50,12 @@
 </app-header>
 <div class="app-body">
   <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
-    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+    <div *ngIf="roleUser === 'member'; else elseBlock">
+      <app-sidebar-nav [navItems]="navItemsRoleUser" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+    </div>
+    <ng-template #elseBlock>
+      <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+    </ng-template>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
   <!-- Main content -->

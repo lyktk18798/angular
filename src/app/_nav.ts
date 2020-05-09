@@ -259,3 +259,30 @@ export const navItems: INavData[] = [
   //   attributes: { disabled: true },
   // },
 ];
+
+export const navItemsRoleUser: INavData[] = [
+  {
+    name: 'Dashboard',
+    url: '/dashboard',
+    icon: 'icon-speedometer',
+    badge: {
+      variant: 'info',
+      text: 'NEW'
+    },
+  },
+  {
+    name: 'Customer',
+    url: '/management/customer',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Producer',
+    url: '/management/producer',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Product',
+    url: '/management/product',
+    icon: 'icon-star',
+  },
+];
