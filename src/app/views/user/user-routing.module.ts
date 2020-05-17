@@ -68,7 +68,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'statistic',
+    path: 'satistical',
     component: SatisticComponent,
     data: {
       title: 'Satistic'

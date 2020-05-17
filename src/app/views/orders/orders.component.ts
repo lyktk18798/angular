@@ -25,7 +25,7 @@ export class OrdersComponent implements OnInit {
     ];
   lstRs: Orders[] = [];
   searchForm: FormGroup;
-  headers = ['No', 'Code', 'Status', 'Customer email', 'Customer phone', 'Address', 'Create date', 'Action'];
+  headers = ['No', 'Code', 'Status', 'Customer email', 'Phone number', 'Address', 'Create date', 'Action'];
   constructor(private modalService: NgbModal,
               private apiService: OrdersService) {}
 

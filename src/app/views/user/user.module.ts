@@ -23,6 +23,7 @@ import {SatisticComponent} from '../satistic/satistic.component';
 import {GroupProductsModalComponent} from '../group-product/group-products-modal/group-products-modal.component';
 import {CategoryModalComponent} from '../category/category-modal/category-modal.component';
 import {ColorModalComponent} from '../color/color-modal/color-modal.component';
+import {ChartsModule} from 'ng2-charts';
 @NgModule({
   imports: [
     UserRoutingModule,
@@ -31,6 +32,7 @@ import {ColorModalComponent} from '../color/color-modal/color-modal.component';
     CommonModule,
     ColorPickerModule,
     AlertModule,
+    ChartsModule,
   ],
 
   declarations: [ UserComponent,

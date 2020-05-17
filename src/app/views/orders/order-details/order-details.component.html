@@ -17,10 +17,10 @@
     <tr *ngFor = "let item of lstRs | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
       <td>{{i+1}}</td>
       <td>{{item.product.name}}</td>
-      <td>{{item.product.price}}</td>
-      <td>{{item.quantity}}</td>
-      <td>{{item.discount}}</td>
-      <td>{{item.product.price * item.quantity * (1- item.discount)}}</td>
+      <td>{{item.product.price | number}}</td>
+      <td>{{item.quantity | number}}</td>
+      <td>{{item.discount * 100}}%</td>
+      <td>{{item.product.price * item.quantity * (1- item.discount) | number}}</td>
     </tr>
     <tr>
       <td *ngIf="lstRs.length===0" style="text-align: center" colspan="6">No records</td>

@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {GroupProduct} from '../../models/group_product';
 import {FormControl, FormGroup} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {CategoryService} from '../../service/category.service';
 import {formatDate} from '@angular/common';
-import {CategoryModalComponent} from '../category/category-modal/category-modal.component';
-import {Category} from '../../models/category';
-import {ModalComfirmComponent} from '../../common/modal-comfirm/modal-comfirm.component';
 import {Report} from '../../models/Report';
 import {ReportService} from '../../service/report.service';
 

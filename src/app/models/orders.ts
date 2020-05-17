@@ -9,4 +9,5 @@ export class Orders {
   createDate: string;
   code: string;
   note: string;
+  phonenumber: string;
 }
