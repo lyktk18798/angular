@@ -20,7 +20,7 @@ import {GroupProduct} from '../../models/group_product';
 export class ProductComponent implements OnInit {
   page = 1;
   pageSize = 3;
-  lstCategory: Category[] = [{id: 0, name: 'All'}];
+  lstCategory: Category[] = [{id: 0, name: 'All', createDate: ''}];
   lstColor: Color[] = [{id: 0, name: 'All'}];
   lstGroups: GroupProduct[] = [{id: 0, name: 'All'}];
   lstProducer: Producer[] = [{id: 0, name: 'All', email: '', category: new Category(), phone: '', dateCreate: ''}];

@@ -52,7 +52,6 @@
           <div class="form-group row">
             <label class="col-md-2 col-form-label">Group</label>
             <div class="col-md-4">
-              <!--<input [style.background]="color" [(colorPicker)]="color" class="form-control" (colorPickerClose)="getColor($event)"/>-->
               <select class="form-control" formControlName="groupId">
                 <option [ngValue]="item.id" *ngFor="let item of lstGroups">{{item.name}}</option>
               </select>

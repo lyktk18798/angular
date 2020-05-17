@@ -3,7 +3,6 @@ import {GroupProduct} from '../../models/group_product';
 import {FormControl, FormGroup} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {formatDate} from '@angular/common';
-import {GroupProductsModalComponent} from '../group-product/group-products-modal/group-products-modal.component';
 import {ModalComfirmComponent} from '../../common/modal-comfirm/modal-comfirm.component';
 import {CategoryService} from '../../service/category.service';
 import {CategoryModalComponent} from './category-modal/category-modal.component';
