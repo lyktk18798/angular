@@ -49,6 +49,8 @@ import { ProductModalComponent } from './views/product/product-modal/product-mod
 import {ColorPickerModule} from 'ngx-color-picker';
 import {OrderDetailsComponent} from './views/orders/order-details/order-details.component';
 import {AlertModule} from './utils/alert/alert.module';
+import {GroupProductsModalComponent} from './views/group-product/group-products-modal/group-products-modal.component';
+import { CategoryModalComponent } from './views/category/category-modal/category-modal.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -80,7 +82,16 @@ import {AlertModule} from './utils/alert/alert.module';
     RegisterComponent,
     ModalComfirmComponent,
   ],
-  entryComponents: [UserModalComponent, ModalComfirmComponent, ProducerModalComponent, ProductModalComponent, OrderDetailsComponent],
+  entryComponents: [
+    UserModalComponent,
+    ModalComfirmComponent,
+    ProducerModalComponent,
+    ProductModalComponent,
+    OrderDetailsComponent,
+    GroupProductsModalComponent,
+    CategoryModalComponent,
+
+  ],
   providers: [
     AuthGuard,
     AuthenticationService,

@@ -21,7 +21,6 @@ export class DefaultLayoutComponent implements  OnInit {
   logout () {
     this.apiService.logout();
   }
-
   ngOnInit(): void {
     this.roleUser = jwt_decode(this.apiService.getToken())[`user-login`].role;
   }

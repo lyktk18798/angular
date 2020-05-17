@@ -35,6 +35,31 @@ export const navItems: INavData[] = [
     url: '/management/orders',
     icon: 'icon-star',
   },
+  {
+    name: 'Category',
+    url: '/management/category',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Color',
+    url: '/management/color',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Group-Products',
+    url: '/management/group_products',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Report',
+    url: '/management/report',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Satistical',
+    url: '/management/satistical',
+    icon: 'icon-star',
+  },
   // {
   //   title: true,
   //   name: 'Theme'
@@ -283,6 +308,31 @@ export const navItemsRoleUser: INavData[] = [
   {
     name: 'Product',
     url: '/management/product',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Orders',
+    url: '/management/orders',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Category',
+    url: '/management/category',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Color',
+    url: '/management/color',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Group-Products',
+    url: '/management/group_products',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Report',
+    url: '/management/report',
     icon: 'icon-star',
   },
 ];

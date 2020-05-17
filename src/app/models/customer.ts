@@ -3,4 +3,5 @@ export class Customer {
   email: string;
   phonenumber: string;
   dateRegistered: string;
+  point: number;
 }

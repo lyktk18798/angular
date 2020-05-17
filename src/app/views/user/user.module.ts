@@ -15,6 +15,13 @@ import {OrdersComponent} from '../orders/orders.component';
 import {OrderDetailsComponent} from '../orders/order-details/order-details.component';
 import {UploadComponent} from '../../utils/upload/upload.component';
 import {AlertModule} from '../../utils/alert/alert.module';
+import {CategoryComponent} from '../category/category.component';
+import {ColorComponent} from '../color/color.component';
+import {GroupProductComponent} from '../group-product/group-product.component';
+import {ReportComponent} from '../report/report.component';
+import {SatisticComponent} from '../satistic/satistic.component';
+import {GroupProductsModalComponent} from '../group-product/group-products-modal/group-products-modal.component';
+import {CategoryModalComponent} from '../category/category-modal/category-modal.component';
 @NgModule({
   imports: [
     UserRoutingModule,
@@ -35,6 +42,14 @@ import {AlertModule} from '../../utils/alert/alert.module';
                   OrdersComponent,
                   OrderDetailsComponent,
                   UploadComponent,
+                  CategoryComponent,
+                  ColorComponent,
+                  GroupProductComponent,
+                  ReportComponent,
+                  SatisticComponent,
+                  GroupProductsModalComponent,
+                  CategoryModalComponent,
+
   ],
 })
 

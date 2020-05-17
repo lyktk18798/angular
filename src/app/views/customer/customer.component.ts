@@ -17,7 +17,7 @@ export class CustomerComponent implements OnInit {
   pageSize = 3;
   lstRs: Customer[] = [];
   searchForm: FormGroup;
-  headers = ['No', 'Email', 'Phonenumber', 'Date registered'];
+  headers = ['No', 'Email', 'Phonenumber', 'Point', 'Date registered'];
   constructor(private service: CustomerService) {}
 
   ngOnInit() {

@@ -1,3 +1,4 @@
+<app-alert></app-alert>
 <div class="row">
   <div class="col-md-12">
     <div class="card">
@@ -7,19 +8,16 @@
       <div class="card-body">
         <form class="form-horizontal" [formGroup]="searchForm">
           <div class="form-group row">
-            <label class="col-md-2 col-form-label" for="hf-email">Email</label>
+            <label class="col-md-2 col-form-label" for="hf-email">Name</label>
             <div class="col-md-4">
-              <input type="email" id="hf-email" name="hf-email" formControlName="email" class="form-control" placeholder="Enter Email.." autocomplete="email">
-            </div>
-            <label class="col-md-2 col-form-label" for="hf-email">Phonenumber</label>
-            <div class="col-md-4">
-              <input type="text"  name="hf-email" formControlName="phonenumber" class="form-control" placeholder="Enter phonenumber.." autocomplete="email">
+              <input type="name" id="hf-email" name="hf-email" formControlName="name" class="form-control" placeholder="Enter name.." autocomplete="email">
             </div>
           </div>
         </form>
       </div>
       <div class="card-footer">
         <button type="submit" (click)="search()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Search</button>
+        <button type="reset" (click)="addNew()" class="btn btn-sm btn-danger"><i class="fa fa-user-plus"></i>Add</button>
       </div>
     </div>
   </div><!--/.col-->
@@ -39,19 +37,23 @@
             </th>
           </tr>
           </thead>
-          <tbody>
-          <tr *ngFor = "let item of lstRs | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
+          <tbody >
+          <tr *ngFor = "let item of lstUsers | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
             <td>{{i+1}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.phone}}</td>
-            <td>{{item.point | number }}</td>
-            <td>{{item.dateRegistered}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.createDate}}</td>
+            <td>
+              <a (click)="edit(item)" tooltip="Edit user" placement="bottom"><i class="fa fa-edit myIcons"></i></a>
+              <a (click)="delete(item)" tooltip="Detele user" placement="bottom"><i class="fa fa-trash myIcons"></i></a>
+            </td>
           </tr>
-          <tr *ngIf="lstRs.length==0"><td colspan="4">No record</td></tr>
+          <tr>
+            <td *ngIf="lstUsers.length===0" colspan="7">No records</td>
+          </tr>
           </tbody>
         </table>
         <nav>
-          <ngb-pagination [collectionSize]="lstRs.length" [pageSize]="pageSize" [(page)]="page" [maxSize]="7" [rotate]="true"></ngb-pagination>
+          <ngb-pagination [collectionSize]="lstUsers.length" [(pageSize)]="pageSize" [(page)]="page" [rotate]="true"></ngb-pagination>
         </nav>
       </div>
     </div>
