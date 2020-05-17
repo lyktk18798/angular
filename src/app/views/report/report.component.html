@@ -1,3 +1,63 @@
-<p>
-  report works!
-</p>
+<app-alert></app-alert>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>Search</strong>
+      </div>
+      <div class="card-body">
+        <form class="form-horizontal" [formGroup]="searchForm">
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label" for="hf-email">Product name</label>
+            <div class="col-md-4">
+              <input type="name" id="hf-email" name="hf-email" formControlName="productName" class="form-control" placeholder="Enter name.." autocomplete="email">
+            </div>
+            <label class="col-md-2 col-form-label" for="hf-email">Customer email</label>
+            <div class="col-md-4">
+              <input type="name" formControlName="customerName" class="form-control" placeholder="Enter name.." autocomplete="email">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button type="submit" (click)="search()" class="btn btn-sm btn-primary"><i class="fa fa-search"></i> Search</button>
+      </div>
+    </div>
+  </div><!--/.col-->
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Results
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+          <tr>
+            <th *ngFor = "let column of headers">
+              {{column}}
+            </th>
+          </tr>
+          </thead>
+          <tbody >
+          <tr *ngFor = "let item of lstUsers | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
+            <td>{{i+1}}</td>
+            <td>{{item.product.name}}</td>
+            <td>{{item.customer.email}}</td>
+            <td>{{item.content}}</td>
+            <td>{{item.createDate}}</td>
+          </tr>
+          <tr>
+            <td *ngIf="lstUsers.length===0" colspan="7">No records</td>
+          </tr>
+          </tbody>
+        </table>
+        <nav>
+          <ngb-pagination [collectionSize]="lstUsers.length" [(pageSize)]="pageSize" [(page)]="page" [rotate]="true"></ngb-pagination>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!--/.col-->
+</div>

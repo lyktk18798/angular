@@ -51,6 +51,7 @@ import {OrderDetailsComponent} from './views/orders/order-details/order-details.
 import {AlertModule} from './utils/alert/alert.module';
 import {GroupProductsModalComponent} from './views/group-product/group-products-modal/group-products-modal.component';
 import { CategoryModalComponent } from './views/category/category-modal/category-modal.component';
+import { ColorModalComponent } from './views/color/color-modal/color-modal.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -90,7 +91,7 @@ import { CategoryModalComponent } from './views/category/category-modal/category
     OrderDetailsComponent,
     GroupProductsModalComponent,
     CategoryModalComponent,
-
+    ColorModalComponent,
   ],
   providers: [
     AuthGuard,

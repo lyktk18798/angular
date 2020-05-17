@@ -22,6 +22,7 @@ import {ReportComponent} from '../report/report.component';
 import {SatisticComponent} from '../satistic/satistic.component';
 import {GroupProductsModalComponent} from '../group-product/group-products-modal/group-products-modal.component';
 import {CategoryModalComponent} from '../category/category-modal/category-modal.component';
+import {ColorModalComponent} from '../color/color-modal/color-modal.component';
 @NgModule({
   imports: [
     UserRoutingModule,
@@ -49,6 +50,7 @@ import {CategoryModalComponent} from '../category/category-modal/category-modal.
                   SatisticComponent,
                   GroupProductsModalComponent,
                   CategoryModalComponent,
+                  ColorModalComponent,
 
   ],
 })

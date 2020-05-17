@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {GroupProduct} from '../../models/group_product';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {formatDate} from '@angular/common';
-import {CategoryModalComponent} from '../category/category-modal/category-modal.component';
-import {Category} from '../../models/category';
 import {ModalComfirmComponent} from '../../common/modal-comfirm/modal-comfirm.component';
 import {Color} from '../../models/color';
 import {ColorService} from '../../service/color.service';
+import {ColorModalComponent} from './color-modal/color-modal.component';
 
 @Component({
   selector: 'app-color',
@@ -35,9 +34,9 @@ export class ColorComponent implements OnInit {
   }
 
   addNew () {
-    const modalRef = this.modalService.open(CategoryModalComponent);
+    const modalRef = this.modalService.open(ColorModalComponent);
     modalRef.componentInstance.u = new GroupProduct();
-    modalRef.componentInstance.title = 'Add new category';
+    modalRef.componentInstance.title = 'Add new color';
     modalRef.result.then((data) => {
       this.search();
     }, (reason) => {
@@ -45,22 +44,10 @@ export class ColorComponent implements OnInit {
     });
   }
 
-  edit (u: Category) {
-    const modalRef = this.modalService.open(CategoryModalComponent);
-    modalRef.componentInstance.u = u;
-    modalRef.componentInstance.title = 'Edit category';
-
-    modalRef.result.then((data) => {
-      this.search();
-    }, (reason) => {
-      this.search();
-    });
-  }
-
-  delete (u: Category) {
+  delete (u: Color) {
     const modalRef = this.modalService.open(ModalComfirmComponent);
     modalRef.componentInstance.id = u.id;
-    modalRef.componentInstance.content = 'Are u sure want to delete this category?';
+    modalRef.componentInstance.content = 'Are u sure want to delete this color?';
     modalRef.componentInstance.service = this.apiService;
 
     modalRef.result.then((data) => {
