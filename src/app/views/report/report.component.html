@@ -44,6 +44,7 @@
           <tr *ngFor = "let item of lstUsers | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
             <td>{{i+1}}</td>
             <td>{{item.product.name}}</td>
+            <td>{{item.product.code}}</td>
             <td>{{item.customer.email}}</td>
             <td>{{item.content}}</td>
             <td>{{item.createDate}}</td>

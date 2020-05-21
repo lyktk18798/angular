@@ -9,6 +9,6 @@ export const lstSatisticType = [
 export const lstDiscount = [
   {id: 1, name: 'Discount by all products'},
   {id: 2, name: 'Discount by group products'},
-  {id: 3, name: 'Discount by invoice'},
+  {id: 3, name: 'Discount by brand'},
   {id: 4, name: 'Discount by product'},
 ];

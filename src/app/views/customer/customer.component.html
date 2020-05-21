@@ -42,6 +42,7 @@
           <tbody>
           <tr *ngFor = "let item of lstRs | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
             <td>{{i+1}}</td>
+            <td>{{item.name}}</td>
             <td>{{item.email}}</td>
             <td>{{item.phone}}</td>
             <td>{{item.point | number }}</td>

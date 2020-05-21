@@ -60,6 +60,11 @@ export const navItems: INavData[] = [
     url: '/management/satistical',
     icon: 'icon-star',
   },
+  {
+    name: 'Discount programs',
+    url: '/management/discount',
+    icon: 'icon-star',
+  },
   // {
   //   title: true,
   //   name: 'Theme'

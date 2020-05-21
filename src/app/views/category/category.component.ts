@@ -19,7 +19,8 @@ export class CategoryComponent implements OnInit {
   pageSize = 3;
   lstUsers: GroupProduct[] = [];
   searchForm: FormGroup;
-  headers = ['No', 'Name', 'Date created', 'Action'];
+  headers = ['No', 'Name', 'Image', 'Date created', 'Action'];
+
   constructor(private modalService: NgbModal,
               private apiService: CategoryService) { }
 

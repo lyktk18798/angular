@@ -16,7 +16,7 @@ export class ReportComponent implements OnInit {
   pageSize = 3;
   lstUsers: Report[] = [];
   searchForm: FormGroup;
-  headers = ['No', 'Product name', 'Customer name', 'Content', 'Date created'];
+  headers = ['No', 'Product name', 'Code', 'Customer name', 'Content', 'Date created'];
   constructor(private modalService: NgbModal,
               private apiService: ReportService) { }
 

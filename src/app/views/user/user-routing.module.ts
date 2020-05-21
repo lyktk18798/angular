@@ -10,6 +10,7 @@ import {ReportComponent} from '../report/report.component';
 import {GroupProductComponent} from '../group-product/group-product.component';
 import {SatisticComponent} from '../satistic/satistic.component';
 import {ColorComponent} from '../color/color.component';
+import {DiscountComponent} from '../discount/discount.component';
 const routes: Routes = [
   {
     path: 'users',
@@ -79,6 +80,13 @@ const routes: Routes = [
     component: ColorComponent,
     data: {
       title: 'Color'
+    }
+  },
+  {
+    path: 'discount',
+    component: DiscountComponent,
+    data: {
+      title: 'Discount programs'
     }
   },
 ];

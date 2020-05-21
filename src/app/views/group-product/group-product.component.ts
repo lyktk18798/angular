@@ -17,12 +17,13 @@ import {GroupProductsModalComponent} from './group-products-modal/group-products
   templateUrl: './group-product.component.html',
   styleUrls: ['./group-product.component.scss']
 })
+
 export class GroupProductComponent implements OnInit {
   page = 1;
   pageSize = 3;
   lstUsers: GroupProduct[] = [];
   searchForm: FormGroup;
-  headers = ['No', 'Name', 'Date created', 'Action'];
+  headers = ['No', 'Name', 'Image', 'Date created', 'Action'];
   constructor(private modalService: NgbModal,
               private apiService: GroupProductsService) { }
 

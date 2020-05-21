@@ -24,6 +24,7 @@ import {GroupProductsModalComponent} from '../group-product/group-products-modal
 import {CategoryModalComponent} from '../category/category-modal/category-modal.component';
 import {ColorModalComponent} from '../color/color-modal/color-modal.component';
 import {ChartsModule} from 'ng2-charts';
+import {DiscountComponent} from '../discount/discount.component';
 @NgModule({
   imports: [
     UserRoutingModule,
@@ -53,7 +54,7 @@ import {ChartsModule} from 'ng2-charts';
                   GroupProductsModalComponent,
                   CategoryModalComponent,
                   ColorModalComponent,
-
+                  DiscountComponent,
   ],
 })
 

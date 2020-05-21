@@ -1,0 +1,30 @@
+<app-alert></app-alert>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <strong>Discount programs</strong>
+      </div>
+      <div class="card-body">
+        <form class="form-horizontal" [formGroup]="searchForm">
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label">Type</label>
+            <div class="col-md-4">
+              <select class="form-control" formControlName="type">
+                <option [ngValue]="item.id" *ngFor="let item of lstDiscount">{{item.name}}</option>
+              </select>
+            </div>
+            <label class="col-md-2 col-form-label">Per</label>
+            <div class="col-md-4">
+              <input type="text" formControlName="percent" class="form-control" placeholder="Enter percent...">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button type="submit" (click)="search()" class="btn btn-sm btn-success"><i class="fa fa-percent"></i> Apply</button>
+      </div>
+    </div>
+  </div><!--/.col-->
+</div>
+
