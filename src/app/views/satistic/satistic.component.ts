@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {lstSatisticType} from '../../constants/Constants';
-import {ChartType, ChartOptions} from 'chart.js';
-import {SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, BaseChartDirective} from 'ng2-charts';
+import {ChartType, ChartOptions, ChartDataSets} from 'chart.js';
+import {SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color} from 'ng2-charts';
 import {SatisticalService} from '../../service/satistical.service';
 
 @Component({
@@ -13,56 +13,74 @@ import {SatisticalService} from '../../service/satistical.service';
 export class SatisticComponent implements OnInit {
   searchForm: FormGroup;
   lstSatisticType = lstSatisticType;
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
-  public pieChartOptions: ChartOptions = {
+  isTypeChart: number;
+  public chartOptions: ChartOptions = {
     responsive: true,
   };
-  public pieChartLabels: Label[] = ['MAN', 'WOMAN', 'KID'];
-  public pieChartData: SingleDataSet = [99333, 5555, 400];
+  public chartLegend = true;
+  public chartPlugins = [];
+  // pie
+  public chartLabels: Label[] = [];
+  public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
+  public pieChartColors: Array<any> = [{
+    backgroundColor: ['red', 'yellow', 'rgba(148,159,177,0.2)'],
+    borderColor: ['rgba(135,206,250,1)', 'rgba(106,90,205,1)', 'rgba(148,159,177,1)']
+  }];
+  // bar
+  public barChartType: ChartType = 'bar';
+  public barChartData: ChartDataSets[] = [];
+  public barChartColors: Color[] = [
+    {backgroundColor: 'red'},
+    {backgroundColor: 'green'},
+  ];
+  // line
+  public lineChartData: ChartDataSets[] = [];
+  public lineChartType = 'line';
+  public lineChartColors: Color[] = [{
+      borderColor: 'black',
+      backgroundColor: 'rgba(255,0,0,0.3)',
+    }];
 
   constructor(private apiService: SatisticalService) {
+    monkeyPatchChartJsTooltip();
+    monkeyPatchChartJsLegend();
   }
 
   ngOnInit() {
     this.searchForm = new FormGroup({
       type: new FormControl(1),
     });
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
+    this.isTypeChart = this.searchForm.value.type;
     this.search();
   }
+
   search() {
+    this.isTypeChart = this.searchForm.value.type;
     if (this.searchForm.value.type === 1) {
       this.apiService.satisticByGroup()
-      .subscribe(rs => {
-        setTimeout(() => {
-          this.pieChartLabels = rs.map(item => item.name);
-          this.pieChartData = rs.map(item => item.total);
-          this.chart.chart.config.data.labels = this.pieChartLabels;
-          this.chart.chart.update();
-        }, 1000);
-
+      .toPromise().then(rs => {
+        this.chartLabels = rs.map(item => item.name);
+        this.pieChartData = rs.map(item => item.total);
       });
     } else if (this.searchForm.value.type === 2) {
       this.apiService.satisticByBrand()
       .subscribe(rs => {
-        this.pieChartType = 'bar';
-        this.pieChartLabels = rs.map(item => item.name);
-        const dataMoney: number[] = rs.map(item => item.totalMoney);
-        const dataQuantity: number[] = rs.map(item => item.totalQuantity)
-        this.pieChartData = [
-          { data: dataMoney, label: 'Total money' },
-          { data: dataQuantity, label: 'Total quantity' },
+        this.chartLabels = rs.map(item => item.name);
+        this.barChartData = [
+          {data: rs.map(item => item.totalMoney), label: 'Money'},
+          {data: rs.map(item => item.totalQuantity), label: 'Quantity'}
         ];
       });
     } else if (this.searchForm.value.type === 3) {
       this.apiService.satisticByMonth()
-      .subscribe(rs => this.lstUsers = rs);
+      .subscribe(rs => {
+        this.chartLabels = rs.map(item => item.month);
+        this.lineChartData = [
+          {data: rs.map(item => item.total), label: 'Money'},
+        ];
+      });
     }
-
   }
 
 }
