@@ -71,11 +71,12 @@ export class SatisticComponent implements OnInit {
           {data: rs.map(item => item.totalMoney), label: 'Money'},
           {data: rs.map(item => item.totalQuantity), label: 'Quantity'}
         ];
+        console.log(this.chartLabels, this.barChartData);
       });
     } else if (this.searchForm.value.type === 3) {
       this.apiService.satisticByMonth()
       .subscribe(rs => {
-        this.chartLabels = rs.map(item => item.month);
+        this.chartLabels = rs.map(item => `${item.month}`);
         this.lineChartData = [
           {data: rs.map(item => item.total), label: 'Money'},
         ];
