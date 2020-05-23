@@ -41,13 +41,4 @@ export class ProductService {
     };
     return this.http.post(`${baseUrl}product/delete/${id}`, httpOptions);
   }
-  pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
-    const data: FormData = new FormData();
-    data.append('file', file);
-    const newRequest = new HttpRequest('POST', `${baseUrl}helper/savefile`, data, {
-      reportProgress: true,
-      responseType: 'text'
-    });
-    return this.http.request(newRequest);
-  }
 }

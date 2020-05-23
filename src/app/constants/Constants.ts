@@ -12,3 +12,7 @@ export const lstDiscount = [
   {id: 3, name: 'Discount by brand'},
   {id: 4, name: 'Discount by product'},
 ];
+
+export const TYPE_UPLOAD_PRODUCT = '1';
+export const TYPE_UPLOAD_BRANCH = '2';
+export const TYPE_UPLOAD_GROUP = '3';

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {baseUrl} from '../constants/Constants';
 import {Observable} from 'rxjs';
 import {Category} from '../models/category';
@@ -27,6 +27,17 @@ export class HelperService {
   }
   getAllGroupProduct (): Observable<GroupProduct[]> {
     return this.http.get<GroupProduct[]>(`${baseUrl}helper/groupProduct/getAll`);
+  }
+
+  pushFileToStorage(file: File, isTypeUpload: string): Observable<HttpEvent<{}>> {
+    const data: FormData = new FormData();
+    data.append('file', file);
+    data.append('isTypeUpload', isTypeUpload);
+    const newRequest = new HttpRequest('POST', `${baseUrl}helper/savefile`, data, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+    return this.http.request(newRequest);
   }
 
 }

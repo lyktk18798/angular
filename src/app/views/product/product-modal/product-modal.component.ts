@@ -3,12 +3,14 @@ import {Producer} from '../../../models/producer';
 import {Category} from '../../../models/category';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {HelperService} from '../../../service/helper.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProductService} from '../../../service/product.service';
 import {Product} from '../../../models/product';
 import {Color} from '../../../models/color';
 import {GroupProduct} from '../../../models/group_product';
 import {AlertService} from '../../../service/alert.service';
+import {oneValueHasToBeChangedValidator} from '../../../helpers/validator.custom';
+import {TYPE_UPLOAD_PRODUCT} from '../../../constants/Constants';
 
 @Component({
   selector: 'app-product-modal',
@@ -31,7 +33,8 @@ export class ProductModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal,
               private apiService: ProductService,
               private helperService: HelperService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private formBuilder: FormBuilder) {
   }
 
   saveForm: FormGroup;
@@ -42,21 +45,41 @@ export class ProductModalComponent implements OnInit {
     this.getColor();
     this.getGroups();
     this.imgURL = this.u.id ? `assets/img/products/${this.u.image}` : '';
-    this.saveForm = new FormGroup({
-      name: new FormControl(this.u.name, Validators.required),
-      image: new FormControl(this.u.image, Validators.required),
-      color: new FormControl(this.u.id ? this.u.color.id : 0),
-      desc: new FormControl(this.u.desciption),
-      quantity: new FormControl(this.u.quantity, [Validators.required, Validators.pattern('[0-9]{1,}')]),
-      size: new FormControl(this.u.size, [Validators.required, Validators.pattern('[0-9]{1,}')]),
-      price: new FormControl(this.u.price, [Validators.required, Validators.pattern('[0-9]{1,}')]),
-      category: new FormControl(this.u.id ? this.u.category.id : 0),
-      producer: new FormControl(this.u.id ? this.u.producer.id : 0),
-      groupId: new FormControl(this.u.id ? this.u.productGroup.id : 0),
-    });
+      this.saveForm = this.formBuilder.group({
+        name: new FormControl(this.u.name, Validators.required),
+        image: new FormControl(this.u.image, Validators.required),
+        color: new FormControl(this.u.id ? this.u.color.id : 0),
+        desc: new FormControl(this.u.desciption),
+        quantity: new FormControl(this.u.quantity, [Validators.required, Validators.pattern('[0-9]{1,}')]),
+        size: new FormControl(this.u.size, [Validators.required, Validators.pattern('[0-9]{1,}')]),
+        price: new FormControl(this.u.price, [Validators.required, Validators.pattern('[0-9]{1,}')]),
+        category: new FormControl(this.u.id ? this.u.category.id : '0'),
+        producer: new FormControl(this.u.id ? this.u.producer.id : '0'),
+        groupId: new FormControl(this.u.id ? this.u.productGroup.id : '0'),
+      }, {
+        validator: oneValueHasToBeChangedValidator([
+          {
+            controlName: 'category',
+            initialValue: '0'
+          },
+          {
+            controlName: 'producer',
+            initialValue: '0'
+          },
+          {
+            controlName: 'groupId',
+            initialValue: '0'
+          },
+          {
+            controlName: 'color',
+            initialValue: '0'
+          }
+        ])
+      }
+    );
   }
 
-  getCategory() {
+    getCategory() {
     this.helperService.getAllCategory()
     .subscribe(rs => this.lstCategory = rs);
   }
@@ -117,15 +140,7 @@ export class ProductModalComponent implements OnInit {
     }
     this.progress.percentage = 0;
     this.currentFileUpload = this.selectedFiles.item(0);
-    this.apiService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
-        // if (event.type === HttpEventType.UploadProgress) {
-        //   this.progress.percentage = Math.round(100 * event.loaded / event.total);
-        // } else if (event instanceof HttpResponse) {
-        //   alert('File Successfully Uploaded');
-        // }
-        this.selectedFiles = undefined;
-      }
-    );
+    return this.helperService.pushFileToStorage(this.currentFileUpload, TYPE_UPLOAD_PRODUCT);
   }
 
   saveProduct() {
@@ -155,8 +170,15 @@ export class ProductModalComponent implements OnInit {
   }
 
   save() {
-    this.upload();
-    this.saveProduct();
+    this.uploadAndSave();
+  }
+
+  async uploadAndSave () {
+    const uploadStatus = await this.upload().toPromise();
+    if (uploadStatus.statusText === 'OK') {
+      this.selectedFiles = undefined;
+      this.saveProduct();
+    }
   }
 
   getColor() {
@@ -169,7 +191,7 @@ export class ProductModalComponent implements OnInit {
   }
 
   getFiles(files: any) {
-    this.saveForm.value.image = files[0].name;
+    this.saveForm.controls['image'].setValue(files[0].name);
     this.selectedFiles = files;
   }
 

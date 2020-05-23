@@ -7,7 +7,8 @@
 <div class="modal-body">
   <form [formGroup]="saveForm">
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Email</label>
+      <label class="col-md-2 col-form-label">Email<span class="required">*</span>
+      </label>
       <div class="col-md-10">
         <input type="text" formControlName="email" placeholder="Enter email valid.." class="form-control" [ngClass]="{ 'is-invalid': emailValid}" />
         <div *ngIf="emailValid" class="invalid-feedback">
@@ -17,7 +18,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Fullname</label>
+      <label class="col-md-2 col-form-label">Fullname<span class="required">*</span></label>
       <div class="col-md-10">
         <input type="text" formControlName="fullname" class="form-control" placeholder="Enter fullname.." [ngClass]="{ 'is-invalid': fullnameValid}">
         <div *ngIf="fullnameValid" class="invalid-feedback">
@@ -26,7 +27,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Phone</label>
+      <label class="col-md-2 col-form-label">Phone<span class="required">*</span></label>
       <div class="col-md-10">
         <input type="text" formControlName="phonenumber" class="form-control" placeholder="Enter phonenumber.." [ngClass]="{ 'is-invalid': phoneValid}">
         <div *ngIf="phoneValid" class="invalid-feedback">
@@ -36,9 +37,10 @@
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-md-2 col-form-label">Role</label>
+      <label class="col-md-2 col-form-label">Role<span class="required">*</span></label>
       <div class="col-md-10">
         <select class="form-control" formControlName="role_user">
+          <option value="0">---Choose---</option>
           <option [ngValue]="item.id" *ngFor="let item of lstRoles">{{item.name}}</option>
         </select>
       </div>

@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../service/user.service';
 import {User} from '../../../models/user';
 import {Role} from '../../../models/role';
 import {HelperService} from '../../../service/helper.service';
 import {AlertService} from '../../../service/alert.service';
+import {oneValueHasToBeChangedValidator} from '../../../helpers/validator.custom';
 
 @Component({
   selector: 'app-user-modal',
@@ -20,15 +21,23 @@ export class UserModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal,
               private apiService: UserService,
               private helperService: HelperService,
-              private alertService: AlertService) { }
+              private alertService: AlertService,
+              private formBuilder: FormBuilder) { }
   saveForm: FormGroup;
   ngOnInit() {
     this.getRoles();
-    this.saveForm = new FormGroup ({
+    this.saveForm = this.formBuilder.group({
       email: new FormControl (this.u.email, [Validators.required, Validators.email]),
       fullname: new FormControl (this.u.fullname, Validators.required),
       phonenumber: new FormControl(this.u.phonenumber, [Validators.required, Validators.pattern('[0-9]{10}')]),
-      role_user: new FormControl(this.u.id ?  this.u.role.id : 1),
+      role_user: new FormControl(this.u.id ?  this.u.role.id : '0'),
+    }, {
+      validator : oneValueHasToBeChangedValidator([
+        {
+          controlName: 'role_user',
+          initialValue: '0'
+        }
+      ])
     });
   }
 

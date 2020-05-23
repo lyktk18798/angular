@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Producer} from '../../../models/producer';
 import {ProducerService} from '../../../service/producer.service';
 import {Category} from '../../../models/category';
 import {HelperService} from '../../../service/helper.service';
 import {AlertService} from '../../../service/alert.service';
+import {oneValueHasToBeChangedValidator} from '../../../helpers/validator.custom';
 
 @Component({
   selector: 'app-producer-modal',
@@ -21,15 +22,23 @@ export class ProducerModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal,
               private apiService: ProducerService,
               private helperService: HelperService,
-              private alertService: AlertService ) { }
+              private alertService: AlertService,
+              private formBuilder: FormBuilder) { }
   saveForm: FormGroup;
   ngOnInit() {
     this.getCategory();
-    this.saveForm = new FormGroup ({
+    this.saveForm = this.formBuilder.group({
       email: new FormControl (this.u.email, [Validators.required, Validators.email]),
       fullname: new FormControl (this.u.name, Validators.required),
       phonenumber: new FormControl(this.u.phone, [Validators.required, Validators.pattern('[0-9]{10}')]),
-      category: new FormControl(this.u.id ? this.u.category.id : 1),
+      category: new FormControl(this.u.id ? this.u.category.id : '0'),
+    },{
+      validator: oneValueHasToBeChangedValidator([
+        {
+          controlName: 'category',
+          initialValue: '0'
+        }
+      ])
     });
   }
 
