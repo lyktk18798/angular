@@ -52,6 +52,7 @@ import {AlertModule} from './utils/alert/alert.module';
 import {GroupProductsModalComponent} from './views/group-product/group-products-modal/group-products-modal.component';
 import { CategoryModalComponent } from './views/category/category-modal/category-modal.component';
 import { ColorModalComponent } from './views/color/color-modal/color-modal.component';
+import { NotificationModalComponent } from './common/notification-modal/notification-modal.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -82,6 +83,7 @@ import { ColorModalComponent } from './views/color/color-modal/color-modal.compo
     LoginComponent,
     RegisterComponent,
     ModalComfirmComponent,
+    NotificationModalComponent,
   ],
   entryComponents: [
     UserModalComponent,
@@ -92,6 +94,7 @@ import { ColorModalComponent } from './views/color/color-modal/color-modal.compo
     GroupProductsModalComponent,
     CategoryModalComponent,
     ColorModalComponent,
+    NotificationModalComponent,
   ],
   providers: [
     AuthGuard,
