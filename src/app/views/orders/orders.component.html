@@ -74,9 +74,20 @@
             <td>{{item.address}}</td>
             <td>{{item.createDate}}</td>
             <td>
-              <a *ngIf="item.status === 1" (click)="updateStatus(item)" tooltip="Change status order to delivering..." ><i class="fa fa-exchange myIcons"></i></a>
-              <a *ngIf="item.status === 2" (click)="updateStatus(item)" tooltip="change status order to done"><i class="fa fa-adjust myIcons"></i></a>
-              <a tooltip="Edit user" (click)="detail(item)" ><i class="fa fa-info myIcons"></i></a>
+              <span *ngIf="item.status === 1">
+                <a (click)="updateStatus(item, 3)" placement="left" ngbTooltip="Change status order to approved but not delivered..." >
+                  <i class="fa fa-exchange myIcons"></i></a>
+                <a (click)="updateStatus(item, 2)" placement="left" ngbTooltip="change status order to unreal orders">
+                  <i class="fa fa-remove myIcons"></i>
+                </a>
+              </span>
+              <a *ngIf="item.status === 3" (click)="updateStatus(item, 4)" placement="left" ngbTooltip="Change status order to delivering..." >
+                <i class="fa fa-forward myIcons"></i></a>
+              <a *ngIf="item.status === 4" (click)="updateStatus(item, 5)" placement="left" ngbTooltip="Change status order to done">
+                <i class="fa fa-truck myIcons"></i>
+              </a>
+              <label *ngIf="item.status === 5"><i class="fa fa-check"></i></label>
+              <a ngbTooltip="Detail orders" placement="left" (click)="detail(item)" ><i class="fa fa-info myIcons"></i></a>
             </td>
           </tr>
           <tr>

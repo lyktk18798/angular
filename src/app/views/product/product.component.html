@@ -115,6 +115,7 @@
             <td>{{item.code}}</td>
             <td>{{item.name}}</td>
             <td>{{item.price | number}}VNĐ</td>
+            <td>{{item.discount * 100}}%</td>
             <td>{{item.productGroup.name}}</td>
             <td>{{item.category.name}}</td>
             <td>{{item.quantity | number}}</td>
@@ -125,8 +126,8 @@
             <td>{{item.producer.name}}</td>
             <td>{{item.dateImport}}</td>
             <td>
-              <a (click)="edit(item)" tooltip="Edit user" placement="bottom"><i class="fa fa-edit myIcons"></i></a>
-              <a (click)="delete(item)" tooltip="Detele user" placement="bottom"><i class="fa fa-trash myIcons"></i></a>
+              <a (click)="edit(item)" ngbTooltip="Edit product" placement="bottom"><i class="fa fa-edit myIcons"></i></a>
+              <a (click)="delete(item)" ngbTooltip="Detele product" placement="bottom"><i class="fa fa-trash myIcons"></i></a>
             </td>
           </tr>
           <tr>

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Category} from '../../models/category';
 import {Producer} from '../../models/producer';
 import {FormControl, FormGroup} from '@angular/forms';
-import {NgbCalendar, NgbDateAdapter, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {HelperService} from '../../service/helper.service';
 import {formatDate} from '@angular/common';
 import {ModalComfirmComponent} from '../../common/modal-comfirm/modal-comfirm.component';
@@ -26,10 +26,13 @@ export class ProductComponent implements OnInit {
   lstProducer: Producer[] = [{id: 0, name: 'All', email: '', category: new Category(), phone: '', dateCreate: ''}];
   lstRs: Product[] = [];
   searchForm: FormGroup;
-  headers = ['No', 'Code', 'Name', 'Price', 'Group', 'Category', 'Quantity', 'Color', 'Size', 'Description', 'Image', 'Producer', 'Date import', 'Action'];
+  headers = ['No', 'Code', 'Name', 'Price', 'Discount', 'Group', 'Category', 'Quantity', 'Color',
+    'Size', 'Description', 'Image', 'Producer', 'Date import', 'Action'];
+
   constructor(private modalService: NgbModal,
               private apiService: ProductService,
-              private helperService: HelperService) {}
+              private helperService: HelperService) {
+  }
 
   ngOnInit() {
     this.getCategory();
@@ -51,32 +54,38 @@ export class ProductComponent implements OnInit {
     });
     this.search();
   }
-  getCategory () {
+
+  getCategory() {
     this.helperService.getAllCategory()
     .subscribe(rs => this.lstCategory = this.lstCategory.concat(rs));
   }
-  getProducer () {
+
+  getProducer() {
     this.helperService.getAllProducer()
     .subscribe(rs => this.lstProducer = this.lstProducer.concat(rs));
   }
-  getColor () {
+
+  getColor() {
     this.helperService.getAllColors()
     .subscribe(rs => this.lstColor = this.lstColor.concat(rs));
   }
-  getGroups () {
+
+  getGroups() {
     this.helperService.getAllGroupProduct()
     .subscribe(rs => this.lstGroups = this.lstGroups.concat(rs));
   }
-  search () {
+
+  search() {
     this.apiService.search(this.searchForm)
     .subscribe(rs => {
       this.lstRs = rs.map(item => ({
-      ...item,
-      dateImport: formatDate(item.dateImport, 'yyyy-MM-dd', 'en')
-    }));
+        ...item,
+        dateImport: formatDate(item.dateImport, 'yyyy-MM-dd', 'en')
+      }));
     });
   }
-  addNew () {
+
+  addNew() {
     const modalRef = this.modalService.open(ProductModalComponent, {size: 'lg'});
     modalRef.componentInstance.u = new Product();
     modalRef.componentInstance.title = 'Add new product';
@@ -86,7 +95,8 @@ export class ProductComponent implements OnInit {
       this.search();
     });
   }
-  edit (u: Producer) {
+
+  edit(u: Producer) {
     const modalRef = this.modalService.open(ProductModalComponent, {size: 'lg'});
     modalRef.componentInstance.u = u;
     modalRef.componentInstance.title = 'Edit product';
@@ -98,7 +108,7 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  delete (u: Producer) {
+  delete(u: Producer) {
     const modalRef = this.modalService.open(ModalComfirmComponent);
     modalRef.componentInstance.id = u.id;
     modalRef.componentInstance.content = 'Are u sure want to delete this product?';
@@ -110,10 +120,12 @@ export class ProductComponent implements OnInit {
       this.search();
     });
   }
-  onSelect (item) {
+
+  onSelect(item) {
     this.searchForm.value.color = item.id;
     this.search();
   }
+
   // downloadFile (name) {
   //   const link = document.createElement('a');
   //   link.setAttribute('target', '_blank');

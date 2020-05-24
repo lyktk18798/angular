@@ -17,6 +17,12 @@ export const TYPE_UPLOAD_PRODUCT = '1';
 export const TYPE_UPLOAD_BRANCH = '2';
 export const TYPE_UPLOAD_GROUP = '3';
 
+export const  WAIT_APPROVE = 1;
+export const  UNREAL_ORDERS = 2;
+export const  NOT_DELIVER = 3;
+export const  DELIVERING = 4;
+export const  DONE = 5;
+
 export const ROLE_PERMISSION = [
   {
     name: 'admin',
