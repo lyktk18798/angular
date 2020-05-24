@@ -341,3 +341,50 @@ export const navItemsRoleUser: INavData[] = [
     icon: 'icon-star',
   },
 ];
+
+export const navItemsRoleMember: INavData[] = [
+  {
+    name: 'Dashboard',
+    url: '/dashboard',
+    icon: 'icon-speedometer',
+    badge: {
+      variant: 'info',
+      text: 'NEW'
+    },
+  },
+  {
+    name: 'Customer',
+    url: '/management/customer',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Producer',
+    url: '/management/producer',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Product',
+    url: '/management/product',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Category',
+    url: '/management/category',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Color',
+    url: '/management/color',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Group-Products',
+    url: '/management/group_products',
+    icon: 'icon-star',
+  },
+  {
+    name: 'Report',
+    url: '/management/report',
+    icon: 'icon-star',
+  },
+];

@@ -87,6 +87,7 @@ export const routes: Routes = [
       },
       {
         path: 'management',
+        canActivateChild: [AuthGuard],
         loadChildren: () => import('./views/user/user.module').then(m => m.UserModule)
       },
     ]

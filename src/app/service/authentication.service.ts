@@ -28,7 +28,6 @@ export class AuthenticationService {
 
   getTokenExpirationDate(token: string): Date {
     const decoded = jwt_decode(token);
-
     if (decoded.exp === undefined) {
       return null;
     }
@@ -36,6 +35,14 @@ export class AuthenticationService {
     const date = new Date(0);
     date.setUTCSeconds(decoded.exp);
     return date;
+  }
+
+  getUserLoginInfo () {
+    const userLoginInfo = jwt_decode(localStorage.getItem(TOKEN_NAME));
+    if (userLoginInfo['user-login'] !== undefined) {
+      return userLoginInfo['user-login'].role;
+    }
+    return '';
   }
 
   isTokenExpired(token?: string): boolean {

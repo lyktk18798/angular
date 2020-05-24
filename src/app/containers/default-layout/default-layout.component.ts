@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {navItems, navItemsRoleUser} from '../../_nav';
+import {navItems, navItemsRoleMember, navItemsRoleUser} from '../../_nav';
 import {AuthenticationService} from '../../service/authentication.service';
 import {Role} from '../../models/role';
 import * as jwt_decode from 'jwt-decode';
@@ -10,8 +10,6 @@ import * as jwt_decode from 'jwt-decode';
 export class DefaultLayoutComponent implements  OnInit {
   public sidebarMinimized = false;
   public navItems = navItems;
-  public navItemsRoleUser = navItemsRoleUser;
-  public roleUser: string;
   constructor(private apiService: AuthenticationService) {}
 
   toggleMinimize(e) {
@@ -22,6 +20,11 @@ export class DefaultLayoutComponent implements  OnInit {
     this.apiService.logout();
   }
   ngOnInit(): void {
-    this.roleUser = jwt_decode(this.apiService.getToken())[`user-login`].role;
+    const roleUser = jwt_decode(this.apiService.getToken())[`user-login`].role;
+    if (roleUser === 'user') {
+      this.navItems = navItemsRoleUser;
+    } else if (roleUser === 'member') {
+      this.navItems = navItemsRoleMember;
+    }
   }
 }
