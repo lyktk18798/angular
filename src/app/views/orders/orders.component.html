@@ -68,7 +68,8 @@
           <tr *ngFor = "let item of lstRs | slice: ((page-1) * pageSize) : ((page-1) * pageSize + pageSize); let i=index">
             <td>{{i+1}}</td>
             <td>{{item.code}}</td>
-            <td>{{item.status === 1 ? 'Not yet delivered' : item.status === 2 ? 'Delivering...' : 'Done'}}</td>
+            <td>{{item.status === 1 ? 'Wait approved' : item.status === 3 ? 'Not yet delivered' : item.status === 4 ? 'Delivering...' : 'Done'}}</td>
+            <td>{{item.totalMoney | number}}</td>
             <td>{{item.customer.email}}</td>
             <td>{{item.phonenumber}}</td>
             <td>{{item.address}}</td>

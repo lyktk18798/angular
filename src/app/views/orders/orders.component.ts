@@ -27,7 +27,7 @@ export class OrdersComponent implements OnInit {
   ];
   lstRs: Orders[] = [];
   searchForm: FormGroup;
-  headers = ['No', 'Code', 'Status', 'Customer email', 'Phone number', 'Address', 'Create date', 'Action'];
+  headers = ['No', 'Code', 'Status', 'Total', 'Customer email', 'Phone number', 'Address', 'Create date', 'Action'];
   orders = new Orders();
   constructor(private modalService: NgbModal,
               private apiService: OrdersService) {
@@ -82,7 +82,6 @@ export class OrdersComponent implements OnInit {
       msg = 'done';
       this.orders.status = DONE;
     }
-    console.log(this.orders.status, u.status);
     modalRef.componentInstance.obj = this.orders;
     modalRef.componentInstance.content = `Are u sure want to change order to ${msg} ?`;
     modalRef.componentInstance.service = this.apiService;
