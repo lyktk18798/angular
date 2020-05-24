@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {baseUrl} from '../constants/Constants';
 import {Observable} from 'rxjs';
 import {Category} from '../models/category';
@@ -7,6 +7,7 @@ import {Role} from '../models/role';
 import {Producer} from '../models/producer';
 import {Color} from '../models/color';
 import {GroupProduct} from '../models/group_product';
+import {Discount} from '../models/discount';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +39,15 @@ export class HelperService {
       responseType: 'text'
     });
     return this.http.request(newRequest);
+  }
+
+  discount (u: Discount) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    };
+    return this.http.post(`${baseUrl}helper/discount`, u, httpOptions);
   }
 
 }
