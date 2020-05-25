@@ -16,7 +16,12 @@
             </div>
             <label class="col-md-2 col-form-label">Per</label>
             <div class="col-md-4">
-              <input type="text" formControlName="percent" class="form-control" placeholder="Enter percent...">
+              <input type="number" formControlName="percent" max="100" min="0" class="form-control" placeholder="Enter percent..."
+                     [ngClass]="{ 'is-invalid': percentValid}" >
+              <div *ngIf="percentValid" class="invalid-feedback">
+                <div *ngIf="percent.errors.required">Percent is required</div>
+                <div *ngIf="percent.errors.pattern">Percent is invalid</div>
+              </div>
             </div>
           </div>
           <div class="form-group row" *ngIf="searchForm.value.type === 2">
@@ -40,7 +45,11 @@
           <div class="form-group row" *ngIf="searchForm.value.type === 4">
             <label class="col-md-2 col-form-label">Code</label>
             <div class="col-md-4">
-              <input type="text" formControlName="code" class="form-control" placeholder="Enter product code...">
+              <input type="text" formControlName="code" class="form-control" placeholder="Enter product code..."
+                     [ngClass]="{ 'is-invalid': codeValid}">
+              <div *ngIf="codeValid" class="invalid-feedback">
+                <div *ngIf="code.errors.required">Code is required</div>
+              </div>
             </div>
           </div>
         </form>
