@@ -24,23 +24,23 @@ export class SatisticComponent implements OnInit {
   public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartColors: Array<any> = [{
-    backgroundColor: ['red', 'yellow', 'rgba(148,159,177,0.2)'],
+    backgroundColor: ['#63c2de', '#f86c6b', '#ffc107'],
     borderColor: ['rgba(135,206,250,1)', 'rgba(106,90,205,1)', 'rgba(148,159,177,1)']
   }];
   // bar
   public barChartType: ChartType = 'bar';
   public barChartData: ChartDataSets[] = [];
   public barChartColors: Color[] = [
-    {backgroundColor: 'red'},
-    {backgroundColor: 'green'},
+    {backgroundColor: '#f8cb00'},
+    {backgroundColor: '#20c997'},
   ];
   // line
   public lineChartData: ChartDataSets[] = [];
   public lineChartType = 'line';
   public lineChartColors: Color[] = [{
-      borderColor: 'black',
-      backgroundColor: 'rgba(255,0,0,0.3)',
-    }];
+    borderColor: 'black',
+    backgroundColor: 'rgba(255,0,0,0.3)',
+  }];
 
   constructor(private apiService: SatisticalService) {
     monkeyPatchChartJsTooltip();
